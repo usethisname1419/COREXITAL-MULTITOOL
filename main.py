@@ -106,12 +106,13 @@ def starthack(port):
                 if port ==22:
                     print("SSH IS OPEN!!")
                     print("ATTEMPTING BRUTEFORCE ATTACK")
+                    q.task_done()
                     usr_arr = [];
                     pass_arr = []
                     try:
                         os.system('cls' if os.name == 'nt' else 'clear')
-                        user_list = input(termcolor.colored("\n[*] Enter Path Of Users List:- ", 'green'))
-                        pass_list = file = input(termcolor.colored("\n[*] Enter Path Of Password List:- ", 'green'))
+                        user_list = os.path.abspath('users.txt')
+                        pass_list = file = os.path.abspath('passes.txt')
                         print(termcolor.colored("[+] BruteForce Started....", 'blue'))
                         print('\n')
                     except KeyboardInterrupt:
