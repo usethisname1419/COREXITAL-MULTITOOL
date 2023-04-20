@@ -61,9 +61,9 @@ ports = input("ENTER NUMBER OF PORTS TO SCAN:   ")
 threads = input("ENTER NUMBER OF THREADS (MAXIMUM: 3)   ")
 if threads=="1":
     thr = 1
-if threads=="2":
+elif threads=="2":
     thr = 2
-if threads=="3":
+elif threads=="3":
     thr = 3
 else:
     print("INVALID INPUT!!!")
