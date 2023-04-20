@@ -1,0 +1,6 @@
+paramiko
+termcolor
+pysocks
+threading
+requests
+socket

@@ -1,4 +1,13 @@
-admin
 root
-user
-me
+toor
+admin
+administrator
+webmaster
+maintenance
+techsupport
+letmein
+logon
+user1
+alpine
+anonymous
+support
