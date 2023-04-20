@@ -1,9 +1,6 @@
 import os
 import socket
 import sys
-import requests
-import socks
-
 import threading
 from queue import Queue
 import time
@@ -15,12 +12,31 @@ init(autoreset=True)
 subprocess.call('clear', shell=True)
 
 
+print("Checking For Dependencies.....")
+time.sleep(1)
+print("XTerm")
+time.sleep(1)
+check_xterm = subprocess.run(["which", "xterm"], capture_output=True, text=True)
+if "xterm" in check_xterm.stdout:
+    print("XTerm is Installed")
+else:
+    install_xterm = subprocess.run(["sudo", "apt", "install", "xterm", "-y"], capture_output=True, text=True)
+    if "Setting up xterm" in install_xterm.stdout:
+        print("\n[*] Xterm Installed")
 
-
-
+    else:
+        print("Install Xterm manually!!!!")
+        print("sudo apt install xterm")
+        time.sleep(1.5)
+        sys.exit()
+time.sleep(1)
+print("REQUIREMENTS")
+os.system('pip install -r requirements.txt')
+os.system('cls' if os.name == 'nt' else 'clear')
 print(Style.BRIGHT + Fore.YELLOW + "START AT:", (datetime.now()))
 print("=============COREXITAL PORT SCANNER=============")
-print("By: Derek Johnston")
+print("")
+print("Written by: Derek Johnston")
 target = input("ENTER TARGET IP:  ")
 ports = input("ENTER NUMBER OF PORTS TO SCAN:   ")
 threads = input("ENTER NUMBER OF THREADS (MAXIMUM: 3)   ")
@@ -35,35 +51,7 @@ else:
     print("ERROR: QUITTING....")
     sys.exit()
 hack = socket.gethostbyname(target)
-print("Note: TOR is not supported")
-todo = input("USE TOR? Y/N:   ")
 
-
-if todo =="Y":
-
-
-    r = requests.get('http://wtfismyip.com/text')
-    print(Style.BRIGHT + Fore.BLUE + "CURRENT IP:", r.text)  # prints my ordinary IP address
-    print("CONNECTING TO TOR.....")
-    socks.set_default_proxy(socks.SOCKS5, '127.0.0.1', 9050)
-    socket.socket = socks.socksocket
-    r = requests.get('http://wtfismyip.com/text')
-    print(Style.BRIGHT + Fore.BLUE + "CONNECTED VIA:", r.text)
-    if r.status_code == 200:
-        print(Style.BRIGHT + Fore.YELLOW + "PROXY STATUS:", Style.BRIGHT + Fore.GREEN + "OK")
-    else:
-        print(Style.BRIGHT + Fore.YELLOW + "PROXY STATUS:", Style.BRIGHT + Fore.RED + "BAD")
-    print("SYN SCANNING NOT SUPPORTED.....QUITTING..")
-    time.sleep(3)
-    sys.exit()
-if todo =="N":
-    r = requests.get('http://wtfismyip.com/text')
-    print(Style.BRIGHT + Fore.BLUE + "CURRENT IP:", r.text)
-    print(Style.BRIGHT + Fore.RED + "NOT CONNECTED TO TOR!!")
-else:
-    print("INVALID INPUT!!!")
-    print("ERROR: QUITTING....")
-    sys.exit()
 num = int(ports)
 print("Starting at: ")
 
@@ -133,7 +121,7 @@ def starthack(port):
                     with open('SSHTarget.txt', 'w') as st:
                         st.write(hack)
                         st.close()
-                    os.system("xterm -e 'python3 attack.py'")
+                    os.system("xterm -e 'proxychains python3 attack.py'")
 
 
 
