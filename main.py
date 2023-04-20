@@ -20,7 +20,7 @@ subprocess.call('clear', shell=True)
 
 print(Style.BRIGHT + Fore.YELLOW + "START AT:", (datetime.now()))
 print("=============COREXITAL PORT SCANNER=============")
-print("")
+print("By: Derek Johnston")
 target = input("ENTER TARGET IP:  ")
 ports = input("ENTER NUMBER OF PORTS TO SCAN:   ")
 threads = input("ENTER NUMBER OF THREADS (MAXIMUM: 3)   ")
