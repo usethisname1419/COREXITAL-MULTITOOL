@@ -30,6 +30,25 @@ else:
         time.sleep(1.5)
         sys.exit()
 time.sleep(1)
+
+print("Proxychains")
+time.sleep(1)
+check_prx = subprocess.run(["which", "proxychains"], capture_output=True, text=True)
+if "proxychains" in check_prx.stdout:
+    print("Proxychains is Installed")
+else:
+    install_prx = subprocess.run(["sudo", "apt", "install", "proxychains", "-y"], capture_output=True, text=True)
+    if "Setting up Proxychains" in install_prx.stdout:
+        print("\n[*] Proxychains Installed")
+
+    else:
+        print("Install Proxychains manually!!!!")
+        print("sudo apt install proxychains")
+        time.sleep(1.5)
+        sys.exit()
+time.sleep(1)
+
+
 print("REQUIREMENTS")
 os.system('pip install -r requirements.txt')
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -60,29 +79,16 @@ print(t1)
 ###################################################################################################
 def threader():
     while True:
-        # gets a worker from the queue
         worker = q.get()
-
-        # Run the example job with the available
-        # worker in queue (thread)
         starthack(worker)
-
-        # completed with the job
         q.task_done()
 
-
-# Creating the queue and threader
 q = Queue()
 
-# number of threads are we going to allow for
+
 for x in range(thr):
     t = threading.Thread(target=threader)
-
-    # classifying as a daemon, so they it will
-    # die when the main dies
     t.daemon = False
-
-    # begins, must come after daemon definition
     t.start()
 
 start = time.time()
