@@ -1,5 +1,11 @@
+###HACKERTOOL1
+By: Derek Johnston
+
+Run the script and it will automatically install requirements and dependencies. Port Scanner with automatic SSH Brute and Automatic anonymous FTP login.
+
+
+
 # HACKERTOOL1
-port scanner with service detection featuring automatic anonymous ftp login and ssh brute
 
 Threaded port scanner I created that checks for anonymous ftp login and ssh brute.
 
