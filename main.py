@@ -10,6 +10,9 @@ import subprocess
 import requests
 import json
 import dns.resolver
+import phonenumbers
+from phonenumbers import geocoder
+from opencage.geocoder import OpenCageGeocode
 
 init(autoreset=True)
 subprocess.call('clear', shell=True)
@@ -137,6 +140,7 @@ def mainmenu():
     "Get IP location [1] \n",
     "Get DNS information [2] \n",
     "Port scan with automatic FTP Anon login and automatic SSH brute [3] \n",
+    "Get location of phone mumber [4] \n"
     )
     todo = input("Select Options:    ")
     if todo == "1":
@@ -149,6 +153,36 @@ def mainmenu():
         print("Invalid Input!!! Quitting!!")
         sys.exit()
 
+
+def phonloc():
+    numenter = input("Enter phone number with country code (+1 US/CA)")
+    print(numenter)
+    pepnumber = phonenumbers.parse(numenter.get())
+    location = phonenumbers.geocoder.description_for_number(pepnumber, "en")
+
+    print("LOCATION:")
+    print(location)
+
+    key = '7b5057c5d0594b948600eaf3affa261d'
+
+    geocoder = OpenCageGeocode(key)
+    query = str(location)
+    results = geocoder.geocode(query)
+
+    lat = results[0]['geometry']['lat']
+    lng = results[0]['geometry']['lng']
+    print("GPS COORDINATES:")
+    print(lat, lng)
+    print("END OF REPORT")
+    print("Corexital Data 2023")
+    enterex = input("Select '1' to return to main menu \n or '2' to quit")
+    if enterex == "1":
+        mainmenu()
+    elif enterex == "2":
+        sys.exit()
+    else:
+        print("Invalid Input!!! Returning to main menu")
+        mainmenu()
 def geotar():
     GeoTar = input("Enter IP:  ")
     print("Getting IP Location.....")
