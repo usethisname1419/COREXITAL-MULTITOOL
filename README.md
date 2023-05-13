@@ -1,11 +1,11 @@
 # HACKERTOOL1
 By: Derek Johnston
 
-Run the script and it will automatically install requirements and dependencies. Port Scanner with service detection featuring automatic SSH Brute and Automatic anonymous FTP login.
-Runs up to 3 threads at once.
-Automatic SSH brute waits 30s between passwords to reduce connection errors
-SSH Brute uses proxychains. Make sure you have proxychains configured properly
-
-
+Run the script as root and it will automatically install requirements and dependencies.
+  Get IP Geoloaction
+  Get DNS Records
+  Port Scanner with Automatic anon FTP login and automatic SSH brute
+  
+  SSH brute uses proxychains so make sure you have it configured correctly.
 
 
