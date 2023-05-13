@@ -142,7 +142,7 @@ def mainmenu():
     "Port scan with automatic FTP Anon login and automatic SSH brute [3] \n",
     "Get location of phone mumber [4] \n"
     )
-    todo = input("Select Options:    ")
+    todo = input(Style.BRIGHT + Fore.YELLOW + "Select Options:    ")
     if todo == "1":
         geotar()
     elif todo == "2":
@@ -157,7 +157,7 @@ def mainmenu():
 
 
 def phonloc():
-    numenter = input("Enter phone number with country code (+1 US/CA)")
+    numenter = input(Style.BRIGHT + Fore.YELLOW + "Enter phone number with country code (+1 US/CA)")
     print(numenter)
     pepnumber = phonenumbers.parse(numenter.get())
     location = phonenumbers.geocoder.description_for_number(pepnumber, "en")
@@ -177,7 +177,7 @@ def phonloc():
     print(lat, lng)
     print("END OF REPORT")
     print("Corexital Data 2023")
-    enterex = input("Select '1' to return to main menu \n or '2' to quit")
+    enterex = input(Style.BRIGHT + Fore.YELLOW + "Select '1' to return to main menu \n or '2' to quit")
     if enterex == "1":
         mainmenu()
     elif enterex == "2":
@@ -186,8 +186,8 @@ def phonloc():
         print("Invalid Input!!! Returning to main menu")
         mainmenu()
 def geotar():
-    GeoTar = input("Enter IP:  ")
-    print("Getting IP Location.....")
+    GeoTar = input(Style.BRIGHT + Fore.YELLOW + "Enter IP:  ")
+    print(Style.BRIGHT + Fore.YELLOW + "Getting IP Location.....")
     request_url = 'https://geolocation-db.com/jsonp/' + GeoTar
     response = requests.get(request_url)
     result = response.content.decode()
@@ -195,7 +195,7 @@ def geotar():
     result = json.loads(result)
     print(result)
     time.sleep(2)
-    enterex = input("Select '1' to return to main menu \n or '2' to quit")
+    enterex = input(Style.BRIGHT + Fore.YELLOW + "Select '1' to return to main menu \n or '2' to quit")
     if enterex == "1":
         mainmenu()
     elif enterex == "2":
@@ -205,26 +205,26 @@ def geotar():
         mainmenu()
 
 def dnsloc():
-    dnstar = input("Enter host name:  ")
+    dnstar = input(Style.BRIGHT + Fore.YELLOW + "Enter host name:  ")
     dnsinfo: dns.resolver.Answer = dns.resolver.resolve(dnstar)
-    print('query qname:', dnsinfo.qname,  len(dnsinfo))
+    print(Style.BRIGHT + Fore.BLUE + 'query qname:', dnsinfo.qname,  len(dnsinfo))
     for rdata in dnsinfo:
         print(rdata)
     dnsinfo: dns.resolver.Answer = dns.resolver.resolve(dnstar, 'MX')
     for rdata in dnsinfo:
-        print("MX: ")
+        print(Style.BRIGHT + Fore.BLUE + "MX: ")
         print(rdata)
     dnsinfo: dns.resolver.Answer = dns.resolver.resolve(dnstar, 'NS')
     for rdata in dnsinfo:
-        print("NAMESERVERS: ")
+        print(Style.BRIGHT + Fore.BLUE + "NAMESERVERS: ")
         print(rdata)
     dnsinfo: dns.resolver.Answer = dns.resolver.resolve(dnstar, 'TXT')
     for rdata in dnsinfo:
-        print("TXT RECORDS: ")
+        print(Style.BRIGHT + Fore.BLUE + "TXT RECORDS: ")
         print(rdata)
 
     time.sleep(2)
-    enterexdns = input("Press '1' to return to main menu. Press '2' to exit")
+    enterexdns = input(Style.BRIGHT + Fore.YELLOW + "Press '1' to return to main menu. Press '2' to exit")
     if enterexdns == '1':
         mainmenu()
     elif enterexdns == '2':
