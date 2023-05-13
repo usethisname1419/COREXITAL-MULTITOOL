@@ -16,6 +16,7 @@ Run the script as root and it will automatically install requirements and depend
   
   Get Geolocation of a phone number 
   
+  Ping
   
   
   SSH brute uses proxychains so make sure you have it configured correctly.
