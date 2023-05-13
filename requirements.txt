@@ -4,4 +4,5 @@ pysocks
 threading
 requests
 socket
-json
+opencage
+phonenumbers
