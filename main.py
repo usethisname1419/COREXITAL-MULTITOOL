@@ -149,6 +149,8 @@ def mainmenu():
         dnsloc()
     elif todo == "3":
         maintool()
+    elif todo =="4":
+        phonloc()
     else:
         print("Invalid Input!!! Quitting!!")
         sys.exit()
