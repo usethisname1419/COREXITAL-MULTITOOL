@@ -1,9 +1,12 @@
-# HACKERTOOL1
+# COREXITAL MULTITOOL
+
+hacking tool for enumeration and automated attacking.
+
+
 By: Derek Johnston
 
 Run the script as root and it will automatically install requirements and dependencies.
   
-# COREXITAL DATA MULTITOOL
 
 # OPTIONS:  
   Get IP Geolocation
