@@ -159,7 +159,7 @@ def mainmenu():
 def phonloc():
     numenter = input(Style.BRIGHT + Fore.YELLOW + "Enter phone number with country code (+1 US/CA)")
     print(numenter)
-    pepnumber = phonenumbers.parse(numenter.get())
+    pepnumber = phonenumbers.parse(numenter)
     location = phonenumbers.geocoder.description_for_number(pepnumber, "en")
 
     print("LOCATION:")
