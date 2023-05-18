@@ -140,7 +140,7 @@ def mainmenu():
     "Get IP location [1] \n",
     "Get DNS information [2] \n",
     "Port scan with automatic FTP Anon login and automatic SSH brute [3] \n",
-    "Get location of phone mumber [4] \n"
+    "Get location of phone number [4] \n"
     )
     todo = input(Style.BRIGHT + Fore.YELLOW + "Select Options:    ")
     if todo == "1":
