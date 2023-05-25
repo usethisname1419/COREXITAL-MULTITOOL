@@ -6,3 +6,4 @@ requests
 socket
 opencage
 phonenumbers
+colorama
