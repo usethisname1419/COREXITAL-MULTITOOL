@@ -6,7 +6,8 @@ hacking tool for enumeration and automated attacking.
 By: Derek Johnston
 
 Run install.py to install depenencies and requirements.
-run main.py after installing to use.
+
+run main.py to use Corexital-Multitool after installation.
   
 
 # OPTIONS:  
