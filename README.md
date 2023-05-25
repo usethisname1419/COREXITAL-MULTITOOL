@@ -5,7 +5,7 @@ hacking tool for enumeration and automated attacking.
 
 By: Derek Johnston
 
-Run the script as root and it will automatically install requirements and dependencies.
+Run the script it will automatically install requirements and dependencies.
   
 
 # OPTIONS:  
